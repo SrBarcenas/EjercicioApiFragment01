@@ -38,6 +38,7 @@ class PokemonListFragment : Fragment(), PokemonListAdapter.OnItemClickListener {
 
         pokemonListAdapter.onItemClickListener = this
 
+        fetchPokemonList()
         return view
     }
 
@@ -49,7 +50,9 @@ class PokemonListFragment : Fragment(), PokemonListAdapter.OnItemClickListener {
             override fun onResponse(call: Call<PokemonListResponse>, response: Response<PokemonListResponse>){
                 if(response.isSuccessful){
                     val pokemonList = response.body()?.results
-                    pokemonListAdapter.setData(pokemonList)
+                    if (pokemonList != null) {
+                        pokemonListAdapter.setData(pokemonList)
+                    }
                 }
             }
 
@@ -69,7 +72,7 @@ class PokemonListFragment : Fragment(), PokemonListAdapter.OnItemClickListener {
 
         if(pokemonId != null){
             bundle.putInt("pokemonId", pokemonId)
-            bundle.putString("name", name)
+            bundle.putString("pokemonName", name)
         }
 
         val navController = findNavController()

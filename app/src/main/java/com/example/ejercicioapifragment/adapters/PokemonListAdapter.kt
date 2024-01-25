@@ -16,6 +16,11 @@ class PokemonListAdapter: RecyclerView.Adapter<PokemonListAdapter.PokemonViewHol
     private var pokemonList: List<PokemonListItem>? = null
     var onItemClickListener: OnItemClickListener? = null
 
+    fun setData(newPokemonlist: List<PokemonListItem>) {
+        pokemonList = newPokemonlist
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
